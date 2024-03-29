@@ -36,6 +36,5 @@ def disconnect():
     print('disconnected from server')
 
 
-# sio.connect('http://complexmonitor.darkube.app')
-sio.connect('http://localhost:3333')
+sio.connect('https://complexmonitor.darkube.app')
 sio.wait()
