@@ -7,7 +7,7 @@ import socket
 
 sio = socketio.Client()
 
-name = socket.gethostname()
+name = socket.gethostname().capitalize()
 
 
 @sio.event
