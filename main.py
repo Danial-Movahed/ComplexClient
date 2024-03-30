@@ -9,6 +9,8 @@ sio = socketio.Client()
 
 name = socket.gethostname().capitalize()
 counter = 0
+InternetLoggedInUser = ""
+
 
 
 @sio.event
@@ -19,9 +21,9 @@ def connect():
 
 @sio.on("NameAccepted")
 def name_accepted():
+    global counter, InternetLoggedInUser
     while True:
         disk = shutil.disk_usage("/")
-        InternetLoggedInUser = ""
         if name == "Piran":
             if counter%500 == 0:
                 InternetLoggedInUser = subprocess.check_output("./checkInternetUser.sh", shell=True)
