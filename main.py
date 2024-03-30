@@ -8,6 +8,7 @@ import socket
 sio = socketio.Client()
 
 name = socket.gethostname().capitalize()
+counter = 0
 
 
 @sio.event
@@ -22,7 +23,10 @@ def name_accepted():
         disk = shutil.disk_usage("/")
         InternetLoggedInUser = ""
         if name == "Piran":
-            InternetLoggedInUser = subprocess.check_output("./checkInternetUser.sh", shell=True)
+            if counter%500 == 0:
+                InternetLoggedInUser = subprocess.check_output("./checkInternetUser.sh", shell=True)
+                counter = 0
+            counter += 1
         sio.emit("Monitor", {
             'name': name,
             'cpu': psutil.cpu_percent(0.5),
@@ -33,7 +37,6 @@ def name_accepted():
             'packageTemp': psutil.sensors_temperatures()['coretemp'][0].current,
             "netLoggedIn": InternetLoggedInUser
         })
-        
 
 
 @sio.event
