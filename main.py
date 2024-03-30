@@ -26,7 +26,7 @@ def name_accepted():
         disk = shutil.disk_usage("/")
         if name == "Piran":
             if counter%500 == 0:
-                InternetLoggedInUser = subprocess.check_output("./checkInternetUser.sh", shell=True)
+                InternetLoggedInUser = subprocess.check_output("./checkInternetUser.sh", shell=True).decode()
                 counter = 0
             counter += 1
         sio.emit("Monitor", {
